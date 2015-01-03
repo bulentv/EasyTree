@@ -62,7 +62,8 @@
             canDrop: null,
             dropping: null,
             dropped: null,
-            stateChanged: null
+            stateChanged: null,
+            nodeClick: null
         };
 
         var $this;
@@ -181,6 +182,10 @@
 
             node.isActive = true;
             $('#' + node.id).addClass('easytree-active');
+
+            if(_settings.nodeClick) {
+              _settings.nodeClick(node);
+            }
 
             if (_settings.stateChanged) { // fire stateChanged event
                 var j = getMinifiedJson(nodes);
@@ -671,7 +676,7 @@
 
             var s6 = new Date();
 
-            $($this.selector + " .easytree-node").on("click", nodes, nodeClick);
+            $($this.selector + " .easytree-title").on("click", nodes, nodeClick);
             $($this.selector + " .easytree-expander").on("click", nodes, toggleNodeEvt);
             $($this.selector + " .easytree-icon").on("dblclick", nodes, toggleNodeEvt);
             $($this.selector + " .easytree-title").on("dblclick", nodes, toggleNodeEvt);
